@@ -40,7 +40,6 @@ def extract_imports(file_path):
     return imports
 
 
-
 def get_installed_versions(modules):
     """Get installed versions of the specified modules."""
     installed_versions = {}
@@ -64,7 +63,7 @@ def generate_requirements_txt(imports, python_version):
     return '\n'.join(requirements)
 
 # Demo
-def demo(folder_path):
+def extractpackages(folder_path):
     """Demonstrate extracting modules and generating a requirements.txt file."""
     all_imports = set()
     
@@ -79,10 +78,10 @@ def demo(folder_path):
     installed_versions = get_installed_versions(all_imports)
     
     # Get Python version
-    python_version = f"{os.sys.version_info.major}.{os.sys.version_info.minor}"
+    python_version = f"{os.sys.version_info.major}.{os.sys.version_info.minor}.{os.sys.version_info.micro}"
     
     # Generate requirements.txt content
-    requirements_content = generate_requirements_txt(installed_versions, python_version)
+    requirements_content = generate_requirements_txt(installed_versions,python_version)
     
     # Write requirements.txt
     with open('requirementsfromExtract.txt', 'w') as f:
@@ -96,4 +95,4 @@ def demo(folder_path):
 if __name__=="__main__":
     path = os.getcwd()
     path = path + "/project"
-    demo(path)
+    extractpackages(path)
