@@ -1,0 +1,7 @@
+you are an expert in python programming with experience of 20 years, your task is to generate a python module that performs the following taskyou are an expert in python programming with experience of 20 years, your task is to generate a python module that performs the following task with efficiency:
+1 - extract the import python modules from .py and .ipynb
+2 - extract the version of the modules installed locally 
+3 - extract the python version for which the module are installed
+4 - generate the requirement.txt and inlist the extracted python imports and the python version, avoid duplicate imports
+4 - generate a demo code to test the task 1,2,3
+
