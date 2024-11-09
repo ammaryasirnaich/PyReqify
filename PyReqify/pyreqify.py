@@ -63,12 +63,18 @@ def generate_requirements_txt(imports: Dict[str, str], python_version: str) -> s
     requirements.append(f"python=={python_version}")
     return '\n'.join(requirements)
 
-def extractpackages(folder_path: str) -> None:
+def extractpackages(source_folder: str, destination_folder: str) -> None:
     """Demonstrate extracting modules and generating a requirements.txt file."""
+    
+    source_folder = os.path.abspath(source_folder) if source_folder != '.' else os.getcwd()
+    destination_folder = os.path.abspath(destination_folder) if destination_folder != '.' else os.getcwd()
+
+
+    
     all_imports = set()
     
     # Extract imports from all .py and .ipynb files in the folder
-    for root, dirs, files in os.walk(folder_path):
+    for root, dirs, files in os.walk(source_folder):
         for file in files:
             if file.endswith('.py') or file.endswith('.ipynb'):
                 file_path = os.path.join(root, file)
@@ -83,8 +89,10 @@ def extractpackages(folder_path: str) -> None:
     # Generate requirements.txt content
     requirements_content = generate_requirements_txt(installed_versions, python_version)
     
-    # Write requirements.txt
-    with open('requirementsfromExtract.txt', 'w') as f:
+    # Write requirements.txt to the destination folder
+    os.makedirs(destination_folder, exist_ok=True)
+    destination_file = os.path.join(destination_folder, 'requirements.txt')
+    with open(destination_file, 'w') as f:
         f.write(requirements_content)
     
     print("requirements.txt generated successfully.")
@@ -92,16 +100,15 @@ def extractpackages(folder_path: str) -> None:
 # Example usage
 # Run the demo on a folder containing your Python files
 
-def extract():
-    if len(sys.argv) != 2:
+def extractreqtxt():
+    if len(sys.argv) != 3:
         print("Usage: pyreqify <folder_path>")
         sys.exit(1)
 
-    folder_path = sys.argv[1]
-    extractpackages(folder_path)
+    source_folder = sys.argv[1]
+    destination_folder = sys.argv[2]
+    print(f'printing destination folder: {destination_folder}')
+    extractpackages(source_folder, destination_folder)
 
 if __name__ == "__main__":
-    extract()
-
-
-# pyreqify
+    extractreqtxt()

@@ -30,5 +30,5 @@ To use the `pyreqify` function and automatically create a `requirements.txt` fil
 2. Run the function, which will generate a `requirements.txt` in the current directory with all extracted dependencies.
 
 ```python
-pyreqify /foldername
+pyreqify <source_folder> <destination folder>
 ```
