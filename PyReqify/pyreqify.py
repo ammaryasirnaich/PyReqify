@@ -4,6 +4,7 @@ import importlib.metadata as importlib_metadata
 import nbformat
 from typing import Set, Dict
 import sys
+import argparse
 
 PACKAGE_MAP = {
     "sklearn": "scikit-learn",
@@ -57,13 +58,13 @@ def get_installed_versions(modules: Set[str]) -> Dict[str, str]:
 
     return installed_versions
 
-def generate_requirements_txt(imports: Dict[str, str], python_version: str) -> str:
+def generate_requirements_txt(imports: Dict[str, str]) -> str:
     """Generate a requirements.txt content."""
     requirements = [f"{module}=={version}" for module, version in imports.items() if version != 'Not Installed']
-    requirements.append(f"python=={python_version}")
+    # requirements.append(f"python=={python_version}")
     return '\n'.join(requirements)
 
-def extractpackages(source_folder: str, destination_folder: str) -> None:
+def extractpackages(source_folder: str, destination_folder: str, include_source_pyversion: bool) -> None:
     """Demonstrate extracting modules and generating a requirements.txt file."""
     
     source_folder = os.path.abspath(source_folder) if source_folder != '.' else os.getcwd()
@@ -84,10 +85,15 @@ def extractpackages(source_folder: str, destination_folder: str) -> None:
     installed_versions = get_installed_versions(all_imports)
     
     # Get Python version
-    python_version = f"{os.sys.version_info.major}.{os.sys.version_info.minor}.{os.sys.version_info.micro}"
-    
+    python_version=''
+    if (include_source_pyversion):
+        python_version = f"{os.sys.version_info.major}.{os.sys.version_info.minor}.{os.sys.version_info.micro}"
+        python_version = (f"python=={python_version}")
+
+
     # Generate requirements.txt content
-    requirements_content = generate_requirements_txt(installed_versions, python_version)
+    requirements_content = generate_requirements_txt(installed_versions)
+    requirements_content += f"\n{python_version}"
     
     # Write requirements.txt to the destination folder
     os.makedirs(destination_folder, exist_ok=True)
@@ -101,14 +107,17 @@ def extractpackages(source_folder: str, destination_folder: str) -> None:
 # Run the demo on a folder containing your Python files
 
 def extractreqtxt():
-    if len(sys.argv) != 3:
-        print("Usage: pyreqify <folder_path>")
-        sys.exit(1)
 
-    source_folder = sys.argv[1]
-    destination_folder = sys.argv[2]
-    print(f'printing destination folder: {destination_folder}')
-    extractpackages(source_folder, destination_folder)
+    parser = argparse.ArgumentParser(description="Generate a requirements.txt file from imports in .py and .ipynb files.")
+    parser.add_argument("source_folder", help="The folder to scan for Python files.")
+    parser.add_argument("destination_folder", help="The folder to save the generated requirements.txt.")
+    parser.add_argument("--include-source-pyversion", type=bool, nargs='?', const=True, default=False, help="Include the source Python version in the requirements.txt.")
+
+
+    args = parser.parse_args()
+
+    extractpackages(args.source_folder, args.destination_folder, args.include_source_pyversion)
+
 
 if __name__ == "__main__":
     extractreqtxt()
