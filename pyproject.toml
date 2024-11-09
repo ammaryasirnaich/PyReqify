@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pyreqify"
 version = "0.0.6"
-dependencies = ["nbformat","argparse"]
+dependencies = ["nbformat"]
 requires-python = ">=3.8"
 authors = [{name = "Ammar Yasir Naich", email = "ammar.naich@gmail.com"}]
 description = "A module to extract and package Python dependencies"
