@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyreqify"
-version = "0.0.7"
+version = "0.0.5"
 dependencies = ["nbformat"]
 requires-python = ">=3.8"
 authors = [{name = "Ammar Yasir Naich", email = "ammar.naich@gmail.com"}]

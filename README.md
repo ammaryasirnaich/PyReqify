@@ -2,6 +2,8 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)  
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Badge](https://img.shields.io/badge/GitHub-Repo-blue.svg)](https://github.com/ammaryasirnaich/PyReqify)
+
 
 A lightweight Python module that efficiently extracts imported modules and generates a `requirements.txt` file with module versions for `.py` and `.ipynb` files in a given directory. Simplify dependency management for your projects!
 
