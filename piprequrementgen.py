@@ -3,7 +3,6 @@ import re
 import pkg_resources
 import nbformat
 
-
 PACKAGE_MAP = {
     "sklearn": "scikit-learn",
     "cv2": "opencv-python",
@@ -19,7 +18,6 @@ PACKAGE_MAP = {
     "torchvision": "torchvision",
     "torch": "torch",
 }
-
 
 def extract_imports(file_path):
     """Extract all imported module names from a .py or .ipynb file."""
