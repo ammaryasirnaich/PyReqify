@@ -3,6 +3,7 @@ import re
 import importlib.metadata as importlib_metadata
 import nbformat
 from typing import Set, Dict
+import sys
 
 PACKAGE_MAP = {
     "sklearn": "scikit-learn",
@@ -91,7 +92,16 @@ def extractpackages(folder_path: str) -> None:
 # Example usage
 # Run the demo on a folder containing your Python files
 
+def extract():
+    if len(sys.argv) != 2:
+        print("Usage: pyreqify <folder_path>")
+        sys.exit(1)
+
+    folder_path = sys.argv[1]
+    extractpackages(folder_path)
+
 if __name__ == "__main__":
-    path = os.getcwd()
-    path ="/Users/a.y.naich/Downloads/packageextractor/demofiles"
-    extractpackages(path)
+    extract()
+
+
+# pyreqify
