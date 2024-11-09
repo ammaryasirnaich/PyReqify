@@ -31,5 +31,9 @@ To use the `pyreqify` function and automatically create a `requirements.txt` fil
 
 ```python
 pyreqify <source_folder> <destination folder> --include-source-pyversion
-Example: pyreqify ~/Workspace/project . 
+#Example 1: generating requirement.txt in the current working folder with no python version included
+pyreqify ~/Workspace/project . 
+
+#Example 2: generating requirement.txt in the deploy folder working folder along with the working python version included in the .txt
+pyreqify ~/Workspace/project ~/Workspace/project/deploy --include-source-pyversion
 ```
