@@ -1,7 +1,8 @@
 import os
 import re
-import pkg_resources
+import importlib.metadata as importlib_metadata
 import nbformat
+from typing import Set, Dict
 
 PACKAGE_MAP = {
     "sklearn": "scikit-learn",
@@ -19,7 +20,7 @@ PACKAGE_MAP = {
     "torch": "torch",
 }
 
-def extract_imports(file_path):
+def extract_imports(file_path: str) -> Set[str]:
     """Extract all imported module names from a .py or .ipynb file."""
     imports = set()
     
@@ -37,31 +38,31 @@ def extract_imports(file_path):
     
     return imports
 
-
-def get_installed_versions(modules):
+def get_installed_versions(modules: Set[str]) -> Dict[str, str]:
     """Get installed versions of the specified modules."""
     installed_versions = {}
     for module in modules:
         try:
-            installed_versions[module] = pkg_resources.get_distribution(module).version
-        except pkg_resources.DistributionNotFound:
-                try: 
-                    if(module in PACKAGE_MAP):
-                        module = PACKAGE_MAP[module]
-                        installed_versions[module] = pkg_resources.get_distribution(module).version          
-                except pkg_resources.DistributionNotFound:
+            installed_versions[module] = importlib_metadata.version(module)
+        except importlib_metadata.PackageNotFoundError:
+            try: 
+                if module in PACKAGE_MAP:
+                    module = PACKAGE_MAP[module]
+                    installed_versions[module] = importlib_metadata.version(module)
+                else:
                     installed_versions[module] = 'Not Installed'
+            except importlib_metadata.PackageNotFoundError:
+                installed_versions[module] = 'Not Installed'
 
     return installed_versions
 
-def generate_requirements_txt(imports, python_version):
+def generate_requirements_txt(imports: Dict[str, str], python_version: str) -> str:
     """Generate a requirements.txt content."""
     requirements = [f"{module}=={version}" for module, version in imports.items() if version != 'Not Installed']
     requirements.append(f"python=={python_version}")
     return '\n'.join(requirements)
 
-# Demo
-def extractpackages(folder_path):
+def extractpackages(folder_path: str) -> None:
     """Demonstrate extracting modules and generating a requirements.txt file."""
     all_imports = set()
     
@@ -79,7 +80,7 @@ def extractpackages(folder_path):
     python_version = f"{os.sys.version_info.major}.{os.sys.version_info.minor}.{os.sys.version_info.micro}"
     
     # Generate requirements.txt content
-    requirements_content = generate_requirements_txt(installed_versions,python_version)
+    requirements_content = generate_requirements_txt(installed_versions, python_version)
     
     # Write requirements.txt
     with open('requirementsfromExtract.txt', 'w') as f:
@@ -90,7 +91,7 @@ def extractpackages(folder_path):
 # Example usage
 # Run the demo on a folder containing your Python files
 
-if __name__=="__main__":
+if __name__ == "__main__":
     path = os.getcwd()
-    path = path + "/project"
+    path ="/Users/a.y.naich/Downloads/packageextractor/demofiles"
     extractpackages(path)
