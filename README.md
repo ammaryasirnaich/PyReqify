@@ -8,7 +8,7 @@ A lightweight Python module that efficiently extracts imported modules and gener
 ## Features
 
 - 📦 **Automatic Module Extraction**: Scans `.py` and `.ipynb` files in a directory to find all imported modules.
-- 🔍 **Version Detection**: Fetches installed versions of imported modules (maps common aliases to official package names).
+- 🔍 **Version Detection**: Fetches installed versions of imported modules (maps common aliases to official package names). It also gives the option to includes fetch `source python version` too.
 - 📝 **Requirements Generation**: Creates a `requirements.txt` file with all extracted dependencies and the current Python version.
 
 
@@ -30,6 +30,6 @@ To use the `pyreqify` function and automatically create a `requirements.txt` fil
 2. Run the function, which will generate a `requirements.txt` in the current directory with all extracted dependencies.
 
 ```python
-pyreqify <source_folder> <destination folder>
+pyreqify <source_folder> <destination folder> --include-source-pyversion
 Example: pyreqify ~/Workspace/project . 
 ```
