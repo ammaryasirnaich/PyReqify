@@ -24,14 +24,11 @@ pip install pyreqify
 # ExtractPackages
 
 ## Usage
-To use the `extractpackages` function and automatically create a `requirements.txt` file:
+To use the `pyreqify` function and automatically create a `requirements.txt` file:
 
 1. Place all `.py` and `.ipynb` files in a folder (e.g., `project`).
 2. Run the function, which will generate a `requirements.txt` in the current directory with all extracted dependencies.
 
 ```python
-from extractpackages import extractpackages
-
-# Example usage
-extractpackages("/path/to/project_folder")
+pyreqify /foldername
 ```
