@@ -31,4 +31,5 @@ To use the `pyreqify` function and automatically create a `requirements.txt` fil
 
 ```python
 pyreqify <source_folder> <destination folder>
+Example: pyreqify ~/Workspace/project . 
 ```
