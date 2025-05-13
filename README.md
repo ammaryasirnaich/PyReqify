@@ -32,7 +32,7 @@ pip install pyreqify
 To use the `pyreqify` function and automatically create a `requirements.txt` file:
 
 1. Place all `.py` and `.ipynb` files in a folder (e.g., `project`).
-2. Run the function, which will generate a `requirements.txt` in the current directory with all extracted dependencies.
+2. Run the function to generate a `requirements.txt` in the current directory with all extracted dependencies.
 ```python
 pyreqify <source_folder> <destination folder> --include-source-pyversion
 ```
@@ -60,8 +60,8 @@ Example 1: Generate `requirements.txt` in the current working folder `without th
 pyreqify ~/Workspace/project .
 ```
 
-Example 2: Generate `requirements.txt` in the `deploy folder`, including the `Python version` in the file.
+Example 2: Generate `requirements.txt` in the `deploy folder`, including the `Python module versions` and `Python version` in the file.
 ```python
-pyreqify ~/Workspace/project ~/Workspace/project/deploy --include-source-pyversion
+pyreqify ~/Workspace/project ~/Workspace/project/deploy --include-module-version --include-source-pyversion
 ```
 
