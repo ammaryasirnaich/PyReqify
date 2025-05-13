@@ -4,15 +4,14 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyreqify"
-version = "0.0.8"
+version = "0.0.11"
 dependencies = ["nbformat"]
 requires-python = ">=3.8"
 authors = [{name = "Ammar Yasir Naich", email = "ammar.naich@gmail.com"}]
-description = "A module to extract Python dependencies packages "
+description = "A module to extract Python dependencies packages from .py and .ipynb"
 readme = "README.md"
 license = {file = "LICENSE.txt"}
 keywords = ["dependency management", "requirements", "Python modules", "requirements.txt", "automation"]
-
 
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -22,16 +21,13 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 
-
 [project.scripts]
-pyreqify = "pyreqify.pyreqify:extractreqtxt"
-
+pyreqify = "pyreqify.extractor:extractreqtxt"
 
 [project.urls]
 "Homepage" = "https://github.com/ammaryasirnaich/PyReqify"
 "Documentation" = "https://github.com/ammaryasirnaich/PyReqify"
 "Source Code" = "https://github.com/ammaryasirnaich/PyReqify"
 
-
-[tool.hatch.build.targets.wheel]
-include = ["pyreqify"]
+[tool.hatch.build]
+include = ["pyreqify/**", "README.md", "LICENSE.txt"]

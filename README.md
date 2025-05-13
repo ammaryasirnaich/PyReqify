@@ -8,8 +8,6 @@
 A lightweight Python module for `requirements.txt generation`. It efficiently extracts imported modules and generates a `requirements.txt` file with module versions for `.py` and `.ipynb` files in a given directory. Simplify dependency management for your projects!
 
 
-
-
 ## Features
 
 - 📦 **Automatic Module Extraction**: Scans `.py` and `.ipynb` files in a directory to find all imported modules.
